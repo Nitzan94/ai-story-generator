@@ -30,7 +30,21 @@ An AI-powered web application that transforms your images into captivating stori
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://ai-story-generator-nitzan94.vercel.app) *(Coming Soon)*
+- **Modern Clean Version**: [AI Story Generator](https://ai-story-generator-gi6hj5cd3-nitzans-projects-d0fda97a.vercel.app)
+- **Memphis Design Style**: [Memphis Version](https://ai-story-generator-gi6hj5cd3-nitzans-projects-d0fda97a.vercel.app/memphis-style.html) 🎨
+
+## 🎨 Design Variants
+
+### Modern Clean Design
+- Minimalist purple/blue gradient theme
+- Smooth animations and subtle shadows
+- Professional and elegant appearance
+
+### Memphis Design Style
+- Bold 80s/90s retro aesthetic
+- Vibrant colors (pink, cyan, yellow, lime)
+- Geometric shapes and patterns
+- Wild animations and 3D effects
 
 ## 🔧 Installation & Setup
 
