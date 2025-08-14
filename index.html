@@ -187,6 +187,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Upload Your Image</h3>
                     <p class="text-gray-500">Drag and drop an image here, or click to browse</p>
+                    <p id="uploadStatus" class="text-blue-600 text-sm hidden">Uploading...</p>
                     <input type="file" id="imageInput" accept="image/*" class="hidden">
                     <button onclick="document.getElementById('imageInput').click()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         Choose File
@@ -347,61 +348,142 @@
         const copyBtn = document.getElementById('copyBtn');
         const errorMessage = document.getElementById('errorMessage');
         const successMessage = document.getElementById('successMessage');
+        const uploadStatus = document.getElementById('uploadStatus');
 
-        // Upload zone drag and drop
-        uploadZone.addEventListener('dragover', (e) => {
+        // Upload zone drag and drop - Improved reliability
+        let dragCounter = 0;
+
+        uploadZone.addEventListener('dragenter', (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            dragCounter++;
             uploadZone.classList.add('dragover');
         });
 
-        uploadZone.addEventListener('dragleave', () => {
-            uploadZone.classList.remove('dragover');
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter--;
+            if (dragCounter === 0) {
+                uploadZone.classList.remove('dragover');
+            }
         });
 
         uploadZone.addEventListener('drop', (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            dragCounter = 0;
             uploadZone.classList.remove('dragover');
+            
             const files = e.dataTransfer.files;
             if (files.length > 0) {
                 handleImageUpload(files[0]);
             }
         });
 
-        uploadZone.addEventListener('click', () => {
-            imageInput.click();
+        // Prevent default drag behaviors on the document
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+        });
+
+        uploadZone.addEventListener('click', (e) => {
+            // Only trigger if clicked directly on upload zone, not child elements
+            if (e.target === uploadZone || uploadZone.contains(e.target)) {
+                imageInput.click();
+            }
         });
 
         imageInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
+            if (e.target.files && e.target.files.length > 0) {
                 handleImageUpload(e.target.files[0]);
             }
         });
 
-        // Handle image upload
+        // Handle image upload - Improved with better error handling
         function handleImageUpload(file) {
-            if (!file.type.startsWith('image/')) {
-                showError('Please select a valid image file.');
+            console.log('Starting image upload:', file.name, file.type, file.size);
+            
+            // Validate file type
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!validTypes.includes(file.type.toLowerCase())) {
+                showError('Please select a valid image file (JPG, PNG, GIF, or WebP).');
                 return;
             }
 
-            if (file.size > 10 * 1024 * 1024) { // 10MB limit
-                showError('Image size should be less than 10MB.');
+            // Validate file size (5MB limit for better performance)
+            if (file.size > 5 * 1024 * 1024) {
+                showError('Image size should be less than 5MB for better performance.');
                 return;
             }
+
+            // Show upload progress
+            uploadStatus.classList.remove('hidden');
+            uploadZone.style.opacity = '0.7';
+            uploadZone.style.pointerEvents = 'none';
 
             const reader = new FileReader();
+            
             reader.onload = (e) => {
-                currentImage = e.target.result;
-                previewImg.src = currentImage;
-                imagePreview.classList.remove('hidden');
-                imagePreview.classList.add('animate-bounce-in');
-                generateBtn.disabled = false;
-                generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                try {
+                    console.log('Image loaded successfully');
+                    currentImage = e.target.result;
+                    previewImg.src = currentImage;
+                    
+                    // Wait for image to load before showing preview
+                    previewImg.onload = () => {
+                        imagePreview.classList.remove('hidden');
+                        imagePreview.classList.add('animate-bounce-in');
+                        generateBtn.disabled = false;
+                        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        
+                        // Reset upload zone
+                        uploadStatus.classList.add('hidden');
+                        uploadZone.style.opacity = '1';
+                        uploadZone.style.pointerEvents = 'auto';
+                        
+                        showSuccess('Image uploaded successfully!');
+                    };
+                    
+                    previewImg.onerror = () => {
+                        showError('Failed to load image. Please try a different image.');
+                        resetUploadZone();
+                    };
+                    
+                } catch (error) {
+                    console.error('Error processing image:', error);
+                    showError('Failed to process image. Please try again.');
+                    resetUploadZone();
+                }
             };
+            
+            reader.onerror = () => {
+                console.error('FileReader error');
+                showError('Failed to read image file. Please try again.');
+                resetUploadZone();
+            };
+            
             reader.readAsDataURL(file);
         }
+        
+        // Reset upload zone helper function
+        function resetUploadZone() {
+            uploadStatus.classList.add('hidden');
+            uploadZone.style.opacity = '1';
+            uploadZone.style.pointerEvents = 'auto';
+            currentImage = null;
+            imageInput.value = '';
+        }
 
-        // Clear image
+        // Clear image - Improved
         function clearImage() {
             currentImage = null;
             imagePreview.classList.add('hidden');
@@ -409,6 +491,14 @@
             generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
             imageInput.value = '';
             resetStoryArea();
+            resetUploadZone();
+            
+            // Clear image src to free memory
+            previewImg.src = '';
+            previewImg.onload = null;
+            previewImg.onerror = null;
+            
+            console.log('Image cleared');
         }
 
         // Reset story area
