@@ -30,21 +30,34 @@ An AI-powered web application that transforms your images into captivating stori
 
 ## 🚀 Live Demo
 
-- **Modern Clean Version**: [AI Story Generator](https://ai-story-generator-gi6hj5cd3-nitzans-projects-d0fda97a.vercel.app)
-- **Memphis Design Style**: [Memphis Version](https://ai-story-generator-gi6hj5cd3-nitzans-projects-d0fda97a.vercel.app/memphis-style.html) 🎨
+- **🎮 MEMPHIS STORY MADNESS** (Interactive Enhanced): [Memphis Enhanced](https://ai-story-generator-j6zh8cy8z-nitzans-projects-d0fda97a.vercel.app/memphis-enhanced.html) ⭐
+- **🎨 Memphis Design Style**: [Memphis Classic](https://ai-story-generator-j6zh8cy8z-nitzans-projects-d0fda97a.vercel.app/memphis-style.html)
+- **🎯 Modern Clean Version**: [Clean Design](https://ai-story-generator-j6zh8cy8z-nitzans-projects-d0fda97a.vercel.app)
 
 ## 🎨 Design Variants
 
-### Modern Clean Design
-- Minimalist purple/blue gradient theme
-- Smooth animations and subtle shadows
-- Professional and elegant appearance
+### 🎮 Memphis Story Madness (Enhanced)
+**The ultimate interactive story experience!**
+- **5 Story Modes**: Superhero 🦸, Sci-Fi 👽, Circus 🎪, Sitcom 📺, Adventure 🏴‍☠️
+- **Character Selection**: Pirate, Alien, Princess, Dinosaur, Robot, Wizard
+- **Interactive Mood Dial**: Change story tone in real-time
+- **Remix Controls**: "More Crazy!", "Add Romance!", "Make Scary!", "More Funny!"
+- **Sound Effects**: Retro sound effects for every action
+- **Story Bubbles**: Animated colorful speech bubbles
+- **Wild Memphis Animations**: Shake, bounce, spin, rainbow effects
 
-### Memphis Design Style
+### 🎨 Memphis Design Style (Classic)
 - Bold 80s/90s retro aesthetic
 - Vibrant colors (pink, cyan, yellow, lime)
 - Geometric shapes and patterns
 - Wild animations and 3D effects
+- Classic story generation
+
+### 🎯 Modern Clean Design
+- Minimalist purple/blue gradient theme
+- Smooth animations and subtle shadows
+- Professional and elegant appearance
+- Simple story generation
 
 ## 🔧 Installation & Setup
 
@@ -157,15 +170,28 @@ ai-story-generator/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🚀 Coming Soon
+
+### 🎨 Image Generation Enhancement
+We're working on an exciting new version that will include:
+- **AI Image Generation** - Create custom images to match your stories
+- **Memphis Style Art** - Generate images in Memphis Design aesthetic
+- **Comic Book Mode** - Create comic panels with POW! and BAM! effects
+- **Multiple Art Styles** - Pixel art, watercolor, neon cyberpunk, and more
+- **Scene Composer** - Mix and match elements to create perfect scenes
+
+Stay tuned for the next level of AI-powered creativity! 🎨✨
+
 ## 🙏 Acknowledgments
 
 - **Google Gemini AI** for powerful image analysis and story generation
 - **Tailwind CSS** for rapid UI development
 - **Lucide Icons** for beautiful iconography
 - **Vercel** for seamless deployment
+- **Memphis Design Movement** for the wild and colorful inspiration
 
 ---
 
-**Made with ❤️ and AI** | Powered by **Gemini**
+**Made with ❤️ and AI** | Powered by **Gemini** | Inspired by **Memphis Design**
 
-[GitHub](https://github.com/Nitzan94/ai-story-generator) • [Live Demo](https://ai-story-generator-nitzan94.vercel.app)
+[🎮 Try Memphis Story Madness](https://ai-story-generator-j6zh8cy8z-nitzans-projects-d0fda97a.vercel.app/memphis-enhanced.html) • [⭐ GitHub](https://github.com/Nitzan94/ai-story-generator)
