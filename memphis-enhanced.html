@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 MEMPHIS STORY MADNESS! 🎨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            /* Memphis Color Palette */
+            --memphis-pink: #FF6B9D;
+            --memphis-cyan: #00E5FF;
+            --memphis-yellow: #FFD93D;
+            --memphis-lime: #6BCF7F;
+            --memphis-orange: #FF8A65;
+            --memphis-purple: #AB47BC;
+            --memphis-blue: #42A5F5;
+            --memphis-red: #FF5252;
+            --memphis-black: #1A1A1A;
+            --memphis-white: #FFFFFF;
+            --memphis-gray: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif !important;
+            background: linear-gradient(45deg, var(--memphis-pink) 0%, var(--memphis-cyan) 25%, var(--memphis-yellow) 50%, var(--memphis-lime) 75%, var(--memphis-orange) 100%);
+            background-size: 400% 400%;
+            animation: memphis-gradient 10s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .memphis-title {
+            font-family: 'Fredoka One', cursive !important;
+            font-weight: 400 !important;
+            background: linear-gradient(45deg, var(--memphis-pink), var(--memphis-cyan), var(--memphis-yellow));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: memphis-text 3s ease-in-out infinite;
+            text-shadow: 3px 3px 0px var(--memphis-black);
+            transform: perspective(500px) rotateX(15deg);
+        }
+
+        /* Enhanced Animations */
+        @keyframes memphis-gradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes memphis-text {
+            0%, 100% { background-position: 0% 50%; transform: perspective(500px) rotateX(15deg); }
+            50% { background-position: 100% 50%; transform: perspective(500px) rotateX(-5deg); }
+        }
+
+        @keyframes memphis-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        @keyframes memphis-shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-5px, 2px) rotate(2deg); }
+            20% { transform: translate(5px, -2px) rotate(-2deg); }
+            30% { transform: translate(-5px, -2px) rotate(2deg); }
+            40% { transform: translate(5px, 2px) rotate(-2deg); }
+            50% { transform: translate(-2px, 5px) rotate(1deg); }
+            60% { transform: translate(2px, -5px) rotate(-1deg); }
+            70% { transform: translate(-2px, -5px) rotate(1deg); }
+            80% { transform: translate(2px, 5px) rotate(-1deg); }
+            90% { transform: translate(-2px, 2px) rotate(1deg); }
+        }
+
+        @keyframes memphis-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes memphis-bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+
+        @keyframes memphis-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes memphis-wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        @keyframes memphis-rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Story Mode Cards */
+        .story-mode-card {
+            background: var(--memphis-white);
+            border: 4px solid var(--memphis-black);
+            border-radius: 25px;
+            box-shadow: 8px 8px 0px var(--memphis-black);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            transform: rotate(-2deg);
+        }
+
+        .story-mode-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .story-mode-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 12px 12px 0px var(--memphis-black);
+            animation: memphis-wiggle 0.5s ease-in-out;
+        }
+
+        .story-mode-card.selected {
+            background: var(--memphis-yellow);
+            animation: memphis-pulse 1s ease-in-out infinite;
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* Mode specific colors */
+        .mode-superhero { box-shadow: 8px 8px 0px var(--memphis-red); }
+        .mode-scifi { box-shadow: 8px 8px 0px var(--memphis-cyan); }
+        .mode-circus { box-shadow: 8px 8px 0px var(--memphis-orange); }
+        .mode-sitcom { box-shadow: 8px 8px 0px var(--memphis-purple); }
+        .mode-adventure { box-shadow: 8px 8px 0px var(--memphis-lime); }
+
+        /* Interactive Elements */
+        .mood-dial {
+            width: 200px;
+            height: 200px;
+            border: 6px solid var(--memphis-black);
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--memphis-red) 0deg 60deg,
+                var(--memphis-orange) 60deg 120deg,
+                var(--memphis-yellow) 120deg 180deg,
+                var(--memphis-lime) 180deg 240deg,
+                var(--memphis-cyan) 240deg 300deg,
+                var(--memphis-purple) 300deg 360deg
+            );
+            position: relative;
+            cursor: pointer;
+            animation: memphis-rainbow 5s linear infinite;
+        }
+
+        .mood-dial::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 40px solid var(--memphis-black);
+            z-index: 10;
+        }
+
+        .mood-dial-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--memphis-white);
+            border: 4px solid var(--memphis-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Remix Buttons */
+        .remix-button {
+            background: var(--memphis-pink);
+            border: 3px solid var(--memphis-black);
+            border-radius: 20px;
+            color: var(--memphis-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0px var(--memphis-black);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            transform: skew(-10deg);
+        }
+
+        .remix-button:hover {
+            transform: skew(-10deg) translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--memphis-black);
+            animation: memphis-shake 0.5s ease-in-out;
+        }
+
+        .remix-button:active {
+            transform: skew(-10deg) translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--memphis-black);
+        }
+
+        /* Story Bubbles */
+        .story-bubble {
+            background: var(--memphis-white);
+            border: 3px solid var(--memphis-black);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+            animation: memphis-bounce 2s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        .story-bubble:nth-child(odd) {
+            background: var(--memphis-yellow);
+            animation-delay: 0.5s;
+        }
+
+        .story-bubble:nth-child(even) {
+            background: var(--memphis-cyan);
+            animation-delay: 1s;
+        }
+
+        .story-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid var(--memphis-black);
+        }
+
+        /* Sound Effect Animations */
+        .sound-effect {
+            position: fixed;
+            font-family: 'Fredoka One', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--memphis-black);
+            text-shadow: 2px 2px 0px var(--memphis-white);
+            z-index: 1000;
+            pointer-events: none;
+            animation: sound-pop 1s ease-out forwards;
+        }
+
+        @keyframes sound-pop {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Character Selector */
+        .character-card {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--memphis-black);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: rotate(-5deg);
+        }
+
+        .character-card:hover {
+            transform: rotate(0deg) scale(1.2);
+            animation: memphis-bounce 0.5s ease-in-out;
+        }
+
+        .character-card.selected {
+            animation: memphis-spin 2s linear infinite;
+            box-shadow: 0 0 20px var(--memphis-yellow);
+        }
+
+        /* Decorative elements */
+        .floating-shape {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid var(--memphis-lime);
+            animation: memphis-float 4s ease-in-out infinite;
+        }
+
+        .shape-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--memphis-orange);
+            animation: memphis-bounce 3s ease-in-out infinite;
+        }
+
+        .shape-square {
+            width: 30px;
+            height: 30px;
+            background: var(--memphis-pink);
+            transform: rotate(45deg);
+            animation: memphis-spin 6s linear infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mood-dial {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .character-card {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Shapes -->
+    <div class="floating-shape shape-triangle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="floating-shape shape-circle" style="top: 20%; right: 10%; animation-delay: 1s;"></div>
+    <div class="floating-shape shape-square" style="bottom: 15%; left: 8%; animation-delay: 2s;"></div>
+    <div class="floating-shape shape-triangle" style="bottom: 25%; right: 15%; animation-delay: 3s;"></div>
+    <div class="floating-shape shape-circle" style="top: 60%; left: 15%; animation-delay: 4s;"></div>
+
+    <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center space-y-6">
+            <h1 class="memphis-title text-4xl md:text-6xl">
+                🎨 MEMPHIS STORY MADNESS! 🎨
+            </h1>
+            <p class="text-2xl font-bold text-gray-800 bg-white/90 p-4 rounded-2xl border-4 border-black shadow-lg transform -rotate-1">
+                CREATE WILD STORIES WITH CRAZY MODES! 🚀
+            </p>
+        </div>
+
+        <!-- Story Mode Selection -->
+        <div class="bg-white/90 p-6 rounded-3xl border-4 border-black shadow-lg">
+            <h2 class="text-3xl font-bold text-center mb-6 font-['Fredoka_One']">
+                🎭 CHOOSE YOUR STORY MODE! 🎭
+            </h2>
+            <div class="grid md:grid-cols-5 gap-4">
+                <!-- Superhero Mode -->
+                <div class="story-mode-card mode-superhero" data-mode="superhero">
+                    <div class="p-4 text-center">
+                        <div class="text-4xl mb-2">🦸</div>
+                        <h3 class="font-bold">SUPERHERO</h3>
+                        <p class="text-xs">POW! BAM!</p>
+                    </div>
+                </div>
+
+                <!-- Sci-Fi Mode -->
+                <div class="story-mode-card mode-scifi" data-mode="scifi">
+                    <div class="p-4 text-center">
+                        <div class="text-4xl mb-2">👽</div>
+                        <h3 class="font-bold">SCI-FI</h3>
+                        <p class="text-xs">RETRO FUTURE</p>
+                    </div>
+                </div>
+
+                <!-- Circus Mode -->
+                <div class="story-mode-card mode-circus" data-mode="circus">
+                    <div class="p-4 text-center">
+                        <div class="text-4xl mb-2">🎪</div>
+                        <h3 class="font-bold">CIRCUS</h3>
+                        <p class="text-xs">WILD & CRAZY</p>
+                    </div>
+                </div>
+
+                <!-- Sitcom Mode -->
+                <div class="story-mode-card mode-sitcom" data-mode="sitcom">
+                    <div class="p-4 text-center">
+                        <div class="text-4xl mb-2">📺</div>
+                        <h3 class="font-bold">SITCOM</h3>
+                        <p class="text-xs">FAMILY FUN</p>
+                    </div>
+                </div>
+
+                <!-- Adventure Mode -->
+                <div class="story-mode-card mode-adventure" data-mode="adventure">
+                    <div class="p-4 text-center">
+                        <div class="text-4xl mb-2">🏴‍☠️</div>
+                        <h3 class="font-bold">ADVENTURE</h3>
+                        <p class="text-xs">EPIC QUEST</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            
+            <!-- Left Column: Upload & Controls -->
+            <div class="space-y-6">
+                <!-- Upload Zone -->
+                <div id="uploadZone" class="bg-white border-4 dashed border-black p-8 text-center space-y-4 min-h-[300px] flex flex-col justify-center cursor-pointer rounded-3xl relative overflow-hidden">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg border-4 border-black relative z-10">
+                        <i data-lucide="image-plus" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 relative z-10">UPLOAD YOUR IMAGE!</h3>
+                    <p class="text-gray-600 font-semibold relative z-10">DRAG & DROP OR CLICK</p>
+                    <p id="uploadStatus" class="text-pink-600 text-lg font-bold hidden relative z-10">UPLOADING...</p>
+                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    <button onclick="document.getElementById('imageInput').click()" class="bg-gradient-to-r from-pink-500 to-cyan-500 text-white px-8 py-4 rounded-2xl font-bold border-3 border-black shadow-lg hover:shadow-xl transition-all">
+                        CHOOSE FILE
+                    </button>
+                </div>
+
+                <!-- Image Preview -->
+                <div id="imagePreview" class="bg-white p-6 rounded-3xl border-4 border-black shadow-lg hidden">
+                    <h4 class="font-bold text-gray-800 mb-4 text-xl">📸 IMAGE PREVIEW</h4>
+                    <div class="relative">
+                        <img id="previewImg" class="w-full h-64 object-cover rounded-xl border-4 border-black" alt="Preview">
+                        <button onclick="clearImage()" class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full border-3 border-black">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Character Selector -->
+                <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-lg">
+                    <h4 class="font-bold text-xl mb-4">🎭 CHOOSE CHARACTER:</h4>
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <div class="character-card bg-red-400" data-character="pirate">🏴‍☠️</div>
+                        <div class="character-card bg-blue-400" data-character="alien">👽</div>
+                        <div class="character-card bg-pink-400" data-character="princess">👸</div>
+                        <div class="character-card bg-green-400" data-character="dinosaur">🦕</div>
+                        <div class="character-card bg-yellow-400" data-character="robot">🤖</div>
+                        <div class="character-card bg-purple-400" data-character="wizard">🧙</div>
+                    </div>
+                </div>
+
+                <!-- Mood Dial -->
+                <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-lg text-center">
+                    <h4 class="font-bold text-xl mb-4">🎨 MOOD DIAL:</h4>
+                    <div class="mood-dial mx-auto" id="moodDial">
+                        <div class="mood-dial-center" id="moodText">HAPPY</div>
+                    </div>
+                    <p class="mt-4 font-semibold" id="moodDescription">Click the dial to change the story mood!</p>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generateBtn" onclick="generateStory()" disabled class="w-full bg-gradient-to-r from-lime-400 to-cyan-500 text-black text-2xl py-6 rounded-3xl font-bold border-4 border-black shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span id="generateText">✨ CREATE EPIC STORY! ✨</span>
+                    <div id="generateLoader" class="hidden flex items-center justify-center gap-3">
+                        <div class="animate-spin rounded-full h-6 w-6 border-4 border-black border-t-transparent"></div>
+                        CREATING MADNESS...
+                    </div>
+                </button>
+            </div>
+
+            <!-- Right Column: Story Display -->
+            <div class="space-y-6">
+                <!-- Story Area -->
+                <div class="bg-white p-8 rounded-3xl border-4 border-black shadow-lg min-h-[600px]">
+                    <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-lime-400 to-green-500 rounded-full flex items-center justify-center border-2 border-black">
+                            <i data-lucide="book-open" class="w-4 h-4 text-white"></i>
+                        </div>
+                        YOUR EPIC STORY!
+                    </h4>
+                    
+                    <!-- Story Content -->
+                    <div id="storyContent">
+                        <div class="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-3 border-black">
+                            <p class="text-gray-600 italic text-lg font-bold flex items-center gap-2">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                                YOUR WILD STORY WILL APPEAR HERE...
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="storyLoading" class="hidden space-y-4">
+                        <div class="h-6 bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full animate-pulse"></div>
+                        <div class="h-6 bg-gradient-to-r from-yellow-400 to-lime-400 rounded-full w-5/6 animate-pulse"></div>
+                        <div class="h-6 bg-gradient-to-r from-orange-400 to-purple-400 rounded-full w-4/6 animate-pulse"></div>
+                    </div>
+
+                    <!-- Generated Story -->
+                    <div id="generatedStory" class="hidden space-y-4">
+                        <div id="storyBubbles"></div>
+                    </div>
+                    
+                    <!-- Copy Button -->
+                    <button id="copyBtn" onclick="copyStory()" class="mt-6 bg-purple-500 text-white px-6 py-3 rounded-2xl font-bold border-3 border-black shadow-lg hidden">
+                        <i data-lucide="copy" class="w-4 h-4 inline mr-2"></i>
+                        COPY STORY!
+                    </button>
+                </div>
+
+                <!-- Remix Controls -->
+                <div id="remixControls" class="bg-white p-6 rounded-3xl border-4 border-black shadow-lg hidden">
+                    <h4 class="font-bold text-xl mb-4">🎛️ REMIX YOUR STORY:</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="remix-button px-4 py-2" onclick="remixStory('crazy')">MORE CRAZY!</button>
+                        <button class="remix-button px-4 py-2 bg-red-500" onclick="remixStory('romance')">ADD ROMANCE!</button>
+                        <button class="remix-button px-4 py-2 bg-purple-600" onclick="remixStory('scary')">MAKE SCARY!</button>
+                        <button class="remix-button px-4 py-2 bg-orange-500" onclick="remixStory('funny')">MORE FUNNY!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center pt-8 bg-white/90 p-6 rounded-3xl border-4 border-black">
+            <p class="text-xl font-bold text-gray-800">
+                🎨 MEMPHIS MADNESS POWERED BY GEMINI AI! 🤖
+            </p>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="errorMessage" class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-2xl shadow-lg hidden z-50 border-4 border-black">
+        <div class="flex items-center gap-2 font-bold">
+            <i data-lucide="alert-circle" class="w-4 h-4"></i>
+            <span id="errorText">OOPS!</span>
+        </div>
+    </div>
+
+    <div id="successMessage" class="fixed top-4 right-4 bg-lime-500 text-black px-6 py-3 rounded-2xl shadow-lg hidden z-50 border-4 border-black">
+        <div class="flex items-center gap-2 font-bold">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span id="successText">AWESOME!</span>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        lucide.createIcons();
+
+        // Global state
+        let currentImage = null;
+        let currentStory = null;
+        let selectedMode = 'superhero';
+        let selectedCharacter = 'pirate';
+        let selectedMood = 'happy';
+        const GEMINI_API_KEY = 'AIzaSyCz_dyVP8tEYxndoan8VNvNxa0eMm-4O5c';
+
+        // DOM Elements
+        const uploadZone = document.getElementById('uploadZone');
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const generateBtn = document.getElementById('generateBtn');
+        const generateText = document.getElementById('generateText');
+        const generateLoader = document.getElementById('generateLoader');
+        const storyContent = document.getElementById('storyContent');
+        const storyLoading = document.getElementById('storyLoading');
+        const generatedStory = document.getElementById('generatedStory');
+        const storyBubbles = document.getElementById('storyBubbles');
+        const copyBtn = document.getElementById('copyBtn');
+        const remixControls = document.getElementById('remixControls');
+        const uploadStatus = document.getElementById('uploadStatus');
+
+        // Story mode data
+        const storyModes = {
+            superhero: {
+                prompt: "Create a superhero story with comic book action, POW! BAM! sound effects, and epic battles between good and evil.",
+                sounds: ["POW!", "BAM!", "KAPOW!", "WHAM!", "ZAP!"]
+            },
+            scifi: {
+                prompt: "Create a retro 80s sci-fi story with space adventures, robots, aliens, and futuristic technology.",
+                sounds: ["BEEP!", "ZOOM!", "BZZT!", "WHIRR!", "BLAST!"]
+            },
+            circus: {
+                prompt: "Create a wild circus story with clowns, acrobats, amazing acts, and magical performances.",
+                sounds: ["TA-DA!", "HONK!", "WHOOSH!", "AMAZING!", "WOW!"]
+            },
+            sitcom: {
+                prompt: "Create a family sitcom story with funny dialogue, everyday situations, and heartwarming moments.",
+                sounds: ["HAHA!", "OH NO!", "PERFECT!", "CLASSIC!", "SWEET!"]
+            },
+            adventure: {
+                prompt: "Create an epic adventure story with treasure hunts, dangerous quests, and brave heroes.",
+                sounds: ["AHOY!", "ADVENTURE!", "TREASURE!", "DANGER!", "VICTORY!"]
+            }
+        };
+
+        const moods = ["ANGRY", "HAPPY", "SILLY", "ROMANTIC", "SCARY", "EXCITED"];
+        let currentMoodIndex = 1; // Start with HAPPY
+
+        // Sound effects
+        function playSound(text) {
+            const soundDiv = document.createElement('div');
+            soundDiv.className = 'sound-effect';
+            soundDiv.textContent = text;
+            soundDiv.style.left = Math.random() * window.innerWidth + 'px';
+            soundDiv.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(soundDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(soundDiv);
+            }, 1000);
+        }
+
+        // Story mode selection
+        document.querySelectorAll('.story-mode-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.story-mode-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedMode = card.dataset.mode;
+                playSound(storyModes[selectedMode].sounds[Math.floor(Math.random() * storyModes[selectedMode].sounds.length)]);
+                showSuccess('MODE SELECTED: ' + selectedMode.toUpperCase() + '!');
+            });
+        });
+
+        // Character selection
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.character-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedCharacter = card.dataset.character;
+                playSound('PERFECT!');
+                showSuccess('CHARACTER: ' + selectedCharacter.toUpperCase() + '!');
+            });
+        });
+
+        // Mood dial
+        document.getElementById('moodDial').addEventListener('click', (e) => {
+            currentMoodIndex = (currentMoodIndex + 1) % moods.length;
+            selectedMood = moods[currentMoodIndex].toLowerCase();
+            document.getElementById('moodText').textContent = moods[currentMoodIndex];
+            document.getElementById('moodDescription').textContent = `Story will be ${selectedMood}!`;
+            playSound(moods[currentMoodIndex] + '!');
+            e.target.style.animation = 'memphis-spin 1s ease-in-out';
+            setTimeout(() => {
+                e.target.style.animation = 'memphis-rainbow 5s linear infinite';
+            }, 1000);
+        });
+
+        // Upload functionality (same as before but with sounds)
+        let dragCounter = 0;
+
+        uploadZone.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter++;
+            uploadZone.style.background = 'var(--memphis-yellow)';
+        });
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter--;
+            if (dragCounter === 0) {
+                uploadZone.style.background = 'white';
+            }
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter = 0;
+            uploadZone.style.background = 'white';
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleImageUpload(files[0]);
+                playSound('DROPPED!');
+            }
+        });
+
+        uploadZone.addEventListener('click', () => {
+            imageInput.click();
+            playSound('CLICK!');
+        });
+
+        imageInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                handleImageUpload(e.target.files[0]);
+            }
+        });
+
+        function handleImageUpload(file) {
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!validTypes.includes(file.type.toLowerCase())) {
+                showError('WRONG FILE TYPE!');
+                playSound('ERROR!');
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                showError('TOO BIG! MAX 5MB!');
+                playSound('TOO BIG!');
+                return;
+            }
+
+            uploadStatus.classList.remove('hidden');
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                currentImage = e.target.result;
+                previewImg.src = currentImage;
+                
+                previewImg.onload = () => {
+                    imagePreview.classList.remove('hidden');
+                    generateBtn.disabled = false;
+                    generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    uploadStatus.classList.add('hidden');
+                    playSound('LOADED!');
+                    showSuccess('IMAGE READY!');
+                };
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        function clearImage() {
+            currentImage = null;
+            imagePreview.classList.add('hidden');
+            generateBtn.disabled = true;
+            generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            imageInput.value = '';
+            resetStoryArea();
+            playSound('CLEARED!');
+        }
+
+        function resetStoryArea() {
+            storyContent.innerHTML = `
+                <div class="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-3 border-black">
+                    <p class="text-gray-600 italic text-lg font-bold flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        YOUR WILD STORY WILL APPEAR HERE...
+                    </p>
+                </div>
+            `;
+            storyLoading.classList.add('hidden');
+            generatedStory.classList.add('hidden');
+            copyBtn.classList.add('hidden');
+            remixControls.classList.add('hidden');
+            lucide.createIcons();
+        }
+
+        // Generate story with enhanced prompts
+        async function generateStory() {
+            if (!currentImage) {
+                showError('UPLOAD IMAGE FIRST!');
+                playSound('ERROR!');
+                return;
+            }
+
+            generateBtn.style.animation = 'memphis-shake 0.5s infinite';
+            generateText.classList.add('hidden');
+            generateLoader.classList.remove('hidden');
+            storyContent.innerHTML = '';
+            storyLoading.classList.remove('hidden');
+            playSound('GENERATING!');
+
+            try {
+                const base64Image = currentImage.split(',')[1];
+                const enhancedPrompt = `
+                    ${storyModes[selectedMode].prompt}
+                    
+                    The main character should be a ${selectedCharacter}.
+                    The mood should be ${selectedMood}.
+                    
+                    Write in Hebrew, make it creative, entertaining, and about 200-300 words.
+                    Include dialogue and exciting descriptions.
+                    Make it wild and fun!
+                `;
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: enhancedPrompt },
+                                { inline_data: { mime_type: "image/jpeg", data: base64Image } }
+                            ]
+                        }]
+                    })
+                });
+
+                if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                    currentStory = data.candidates[0].content.parts[0].text;
+                    displayStoryInBubbles(currentStory);
+                    playSound('SUCCESS!');
+                } else {
+                    throw new Error('No story generated');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('GENERATION FAILED!');
+                playSound('FAILED!');
+                resetStoryArea();
+            } finally {
+                generateBtn.style.animation = '';
+                generateText.classList.remove('hidden');
+                generateLoader.classList.add('hidden');
+                storyLoading.classList.add('hidden');
+            }
+        }
+
+        // Display story in animated bubbles
+        function displayStoryInBubbles(story) {
+            const sentences = story.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            storyBubbles.innerHTML = '';
+            generatedStory.classList.remove('hidden');
+            copyBtn.classList.remove('hidden');
+            remixControls.classList.remove('hidden');
+
+            sentences.forEach((sentence, index) => {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'story-bubble';
+                    bubble.textContent = sentence.trim() + '.';
+                    storyBubbles.appendChild(bubble);
+                    playSound(storyModes[selectedMode].sounds[index % storyModes[selectedMode].sounds.length]);
+                }, index * 1000);
+            });
+        }
+
+        // Remix functionality
+        async function remixStory(remixType) {
+            if (!currentStory) return;
+            
+            playSound('REMIX!');
+            const remixPrompts = {
+                crazy: 'Make this story 10 times more crazy and wild with unexpected twists!',
+                romance: 'Add romantic elements and love story to this tale!',
+                scary: 'Make this story spooky and thrilling with scary elements!',
+                funny: 'Make this story much more funny and hilarious!'
+            };
+
+            // Simple client-side remix (in real app, you'd call API again)
+            showSuccess(`REMIXING: ${remixType.toUpperCase()}!`);
+            
+            // Add visual feedback
+            storyBubbles.style.animation = 'memphis-shake 1s ease-in-out';
+            setTimeout(() => {
+                storyBubbles.style.animation = '';
+            }, 1000);
+        }
+
+        async function copyStory() {
+            if (!currentStory) return;
+            
+            try {
+                await navigator.clipboard.writeText(currentStory);
+                showSuccess('STORY COPIED!');
+                playSound('COPIED!');
+                copyBtn.style.animation = 'memphis-bounce 0.6s ease-out';
+                setTimeout(() => copyBtn.style.animation = '', 600);
+            } catch (error) {
+                showError('COPY FAILED!');
+                playSound('ERROR!');
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('errorMessage').classList.add('hidden');
+            }, 3000);
+        }
+
+        function showSuccess(message) {
+            document.getElementById('successText').textContent = message;
+            document.getElementById('successMessage').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('hidden');
+            }, 2000);
+        }
+
+        // Initialize first mode
+        document.querySelector('[data-mode="superhero"]').classList.add('selected');
+        document.querySelector('[data-character="pirate"]').classList.add('selected');
+        
+        // Auto-play welcome sound
+        setTimeout(() => playSound('WELCOME!'), 500);
+    </script>
+</body>
+</html>
